@@ -1,6 +1,5 @@
 package com.alexander.service;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        initListiners();
+        initListeners();
     }
 
     private void initViews(){
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         buttonActivity = findViewById(R.id.activity);
     }
 
-    private void initListiners(){
+    private void initListeners(){
 
         buttonService.setOnClickListener(new ButtonServiceClickListener());
         buttonActivity.setOnClickListener(new ButtonActivityClickListener());
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            startService(new Intent(MainActivity.this, MyIntentService.class));
+            startService(MyIntentService.newIntent(MainActivity.this));
         }
     }
 
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            startActivity(new Intent(MainActivity.this, SecondActivity.class));
+            startActivity(SecondActivity.newIntent(MainActivity.this));
         }
     }
 }

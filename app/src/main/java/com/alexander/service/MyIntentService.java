@@ -46,16 +46,28 @@ public class MyIntentService extends IntentService {
                 try {
                     messenger.send(Message.obtain(null, MSG_SET_VALUE, i));
                     i++;
+                    if (i>100) {
+                        return;
+                    }
                     Thread.sleep(2000);
-                } catch (RemoteException  | InterruptedException e){
-                    e.printStackTrace();
+                } catch (RemoteException e){
+
+                    Log.v("RemoteException", e.getMessage());
+
+                } catch (InterruptedException t){
+
+                    Log.v("InterruptedException", t.getMessage());
                 }
             }
         }
     }
 
+    public static Intent newIntent(Context context){
+        Intent intent = new Intent(context, MyIntentService.class);
+        return intent;
+    }
 
-    class IncomingHandler extends Handler{
+    private class IncomingHandler extends Handler{
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

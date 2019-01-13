@@ -86,7 +86,7 @@ public class SecondActivity extends AppCompatActivity {
 
     public void bindService(){
 
-     bindService(new Intent(SecondActivity.this,MyIntentService.class),mServiceConnection,Context.BIND_AUTO_CREATE);
+     bindService(MyIntentService.newIntent(this),mServiceConnection,Context.BIND_AUTO_CREATE);
 
     }
     public void unBindService(){
@@ -101,5 +101,10 @@ public class SecondActivity extends AppCompatActivity {
         }
 
         unbindService(mServiceConnection);
+    }
+
+    public static Intent newIntent(Context context){
+        Intent intent = new Intent(context, SecondActivity.class);
+        return intent;
     }
 }
